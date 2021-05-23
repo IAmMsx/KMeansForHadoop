@@ -14,14 +14,17 @@ public class Center implements WritableComparable<Center> {
     private Integer label;
 
     public Center() {
+        point = new Point(); // 不写会throw point空指针
     }
 
     public Center(Point point, int label) {
+        this();
         this.point = point;
         this.label = label;
     }
 
     public Center(String line) {
+        this();
         point = new Point(line);
         String[] split = line.split("\t");
         label = Integer.parseInt(split[split.length - 1]);

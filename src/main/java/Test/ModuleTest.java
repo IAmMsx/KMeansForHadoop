@@ -1,5 +1,6 @@
 package Test;
 
+import Control.KmeansDriver;
 import Module.Center;
 import Module.Point;
 import Utils.Utils;
@@ -27,7 +28,7 @@ public class ModuleTest {
     }
 
     @Test
-    public void ReadTest() throws IOException, URISyntaxException {
+    public void ReadTest() throws IOException {
         File file = new File("src/main/resources/center.txt");
         BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
         String line;
@@ -41,11 +42,11 @@ public class ModuleTest {
     }
 
     @Test
-    public void mapTest() throws IOException, URISyntaxException {
+    public void mapTest() throws IOException {
         ReadTest();
         System.out.println("******************************");
         Point outV = new Point("-0.7794151074651527\t-1.504349668535982\t0.7981106876823574\t1");
-        double minDistance = Double.MAX_VALUE, distance = 0.0;
+        double minDistance = Double.MAX_VALUE, distance;
         Center outK = new Center();
         for (Center center : centers) {
             try {
@@ -60,5 +61,21 @@ public class ModuleTest {
         }
         System.out.println("outk:" + outK);
         System.out.println("outV:" + outV);
+    }
+
+    @Test
+    public void test() throws Exception {
+//        String[] Path = new String[3];
+//        Path[0] = "src/main/java/input/center.txt";//centerPath
+//        Path[1] = "src/main/java/input/250_each.txt";// dataPath
+//        Path[2] = "src/main/java/output2";// tempCenterPath
+
+        String[] Path = new String[3];
+        Path[0] = "src/main/java/2ClassInput/center.txt";//centerPath
+        Path[1] = "src/main/resources/500_each.txt";// dataPath
+        Path[2] = "src/main/java/2ClassOutput";// tempCenterPath
+
+        Utils.deletePath(Path[2]);
+        KmeansDriver.run(Path[0], Path[1], Path[2], true);
     }
 }

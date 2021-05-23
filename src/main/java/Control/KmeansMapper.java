@@ -21,7 +21,7 @@ public class KmeansMapper extends Mapper<LongWritable, Text, Center, Point> {
 
     // 将中心点读入
     @Override
-    protected void setup(Context context) throws IOException, InterruptedException {
+    protected void setup(Context context) throws IOException{
         URI[] cacheFiles = context.getCacheFiles();
 //        File file = new File(cacheFiles[0].toURL().getPath());
         FileSystem fs = FileSystem.get(context.getConfiguration());
@@ -40,6 +40,7 @@ public class KmeansMapper extends Mapper<LongWritable, Text, Center, Point> {
         //
         Point outV = new Point(value.toString());
 
+        // 判断点与每个中心点的距离，将其分类至与其最近的中心点
         double minDistance = Double.MAX_VALUE, distance = 0.0;
         Center outK = new Center();
         for (Center center : centers) {
