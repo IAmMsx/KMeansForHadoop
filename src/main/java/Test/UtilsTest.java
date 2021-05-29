@@ -84,15 +84,8 @@ public class UtilsTest {
 //    }
 
     @Test
-    public void test1(){
-        createPoints();
-        double sum = 0.0;
-        for (Point point : points) {
-            for (int i = 0; i < point.getAttributes().length; i++) {
-                sum += Math.pow(point.getAttributes()[i],2);
-            }
-        }
-        System.out.println(sum);
+    public void test1() throws Exception {
+        Utils.transferCenterFile("src/main/java/2ClassLastOutput/points.txt","src/main/java/2ClassOutput");
     }
 
 
